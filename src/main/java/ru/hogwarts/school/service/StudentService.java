@@ -26,11 +26,14 @@ public class StudentService {
     }
 
     public Student updateStudent(Student student) {
-        students.put(student.getStudentId(), student);
-        return student;
+        if (students.containsKey(student.getStudentId())) {
+            students.put(student.getStudentId(), student);
+            return student;
+        }
+        return null;
     }
 
-    public Student deleteUser(Long studentId) {
+    public Student deleteStudent(Long studentId) {
         return students.remove(studentId);
     }
 

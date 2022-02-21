@@ -1,22 +1,22 @@
 package ru.hogwarts.school.model;
 
 public class Faculty {
-    private long id;
+    private long facultyId;
     private String name;
     private String color;
 
-    public Faculty(long id, String name, String color) {
-        this.id = id;
+    public Faculty(long facultyId, String name, String color) {
+        this.facultyId = facultyId;
         this.name = name;
         this.color = color;
     }
 
-    public long getId() {
-        return id;
+    public long getFacultyId() {
+        return facultyId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setFacultyId(long facultyId) {
+        this.facultyId = facultyId;
     }
 
     public String getName() {
