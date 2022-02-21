@@ -12,4 +12,26 @@ public class StudentService {
     private long counterId = 0;
     private Map<Long, Student> students = new HashMap<>();
 
+    public Student createStudent(Student student) {
+        while (students.containsKey(counterId)) {
+            counterId++;
+        }
+        student.setStudentId(counterId);
+        students.put(counterId, student);
+        return student;
+    }
+
+    public Student getStudentById(Long studentId) {
+        return students.get(studentId);
+    }
+
+    public Student updateStudent(Student student) {
+        students.put(student.getStudentId(), student);
+        return student;
+    }
+
+    public Student deleteUser(Long studentId) {
+        return students.remove(studentId);
+    }
+
 }
