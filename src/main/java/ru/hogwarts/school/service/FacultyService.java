@@ -27,8 +27,11 @@ public class FacultyService {
     }
 
     public Faculty updateFaculty(Faculty faculty) {
-        faculties.put(faculty.getFacultyId(), faculty);
-        return faculty;
+        if (faculties.containsKey(faculty.getFacultyId())) {
+            faculties.put(faculty.getFacultyId(), faculty);
+            return faculty;
+        }
+        return null;
     }
 
     public Faculty deleteFaculty(Long facultyId) {

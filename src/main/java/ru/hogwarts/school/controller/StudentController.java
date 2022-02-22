@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -45,5 +47,14 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(deleteStudent);
+    }
+
+    @GetMapping("{age}")
+    public ResponseEntity getStudentsByAge(@PathVariable int age) {
+        ArrayList<Student> studentsByAge = studentService.getStudentsByAge(age);
+        if (studentsByAge.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(studentsByAge);
     }
 }
