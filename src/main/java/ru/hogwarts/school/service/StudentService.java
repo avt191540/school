@@ -39,14 +39,14 @@ public class StudentService {
     }
 
     public ArrayList<Student> getStudentsByAge(int age) {
-        ArrayList<Student> values = new ArrayList<>(students.values());
-        ArrayList<Student> studentsByAge = new ArrayList<>();
-        for (Student studentAge: values) {
-            if (studentAge.getAge() == age) {
-                studentsByAge.add(studentAge);
+        ArrayList<Student> listOfStudents = new ArrayList<>(students.values());
+        ArrayList<Student> listOfStudentsByAge = new ArrayList<>();
+        for (Student student: listOfStudents) {
+            if (student.getAge() == age) {
+                listOfStudentsByAge.add(student);
             }
         }
-        return studentsByAge;
+        return listOfStudentsByAge;
     }
 
 }

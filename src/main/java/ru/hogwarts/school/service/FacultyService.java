@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,17 @@ public class FacultyService {
 
     public Faculty deleteFaculty(Long facultyId) {
         return faculties.remove(facultyId);
+    }
+
+    public ArrayList<Faculty> getFacultiesByColor(String color) {
+        ArrayList<Faculty> listOfFaculties = new ArrayList<>(faculties.values());
+        ArrayList<Faculty> listOfFacultiesByColor = new ArrayList<>();
+        for (Faculty faculty: listOfFaculties) {
+            if (faculty.getColor().equals(color)) {
+                listOfFacultiesByColor.add(faculty);
+            }
+        }
+        return listOfFacultiesByColor;
     }
 
 }
