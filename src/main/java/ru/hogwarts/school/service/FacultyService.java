@@ -2,7 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +11,14 @@ import java.util.Map;
 @Service
 public class FacultyService {
 
+    private final FacultyRepository facultyRepository;
+
     private long counterId = 0;
     private Map<Long, Faculty> faculties = new HashMap<>();
+
+    public FacultyService(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
 
     public Faculty createFaculty(Faculty faculty) {
         while (faculties.containsKey(counterId)) {
