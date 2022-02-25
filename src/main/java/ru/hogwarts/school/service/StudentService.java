@@ -13,40 +13,27 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    private long counterId = 0;
-    private Map<Long, Student> students = new HashMap<>();
-
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     public Student createStudent(Student student) {
-        while (students.containsKey(counterId)) {
-            counterId++;
-        }
-        student.setStudentId(counterId);
-        students.put(counterId, student);
-        return student;
+        return studentRepository.save(student);
     }
 
     public Student getStudentById(Long studentId) {
-        return students.get(studentId);
+        return studentRepository.findById(studentId).get();
     }
 
     public Student updateStudent(Student student) {
-        if (students.containsKey(student.getStudentId())) {
-            students.put(student.getStudentId(), student);
-            return student;
-        }
-        return null;
+        return studentRepository.save(student);
     }
 
-    public Student deleteStudent(Long studentId) {
-        return students.remove(studentId);
+    public void deleteStudent(Long studentId) { studentRepository.deleteById(studentId);
     }
 
     public ArrayList<Student> getStudentsByAge(int age) {
-        ArrayList<Student> listOfStudents = new ArrayList<>(students.values());
+        ArrayList<Student> listOfStudents = new ArrayList<>(studentRepository.findAll());
         ArrayList<Student> listOfStudentsByAge = new ArrayList<>();
         for (Student student: listOfStudents) {
             if (student.getAge() == age) {
@@ -56,4 +43,8 @@ public class StudentService {
         return listOfStudentsByAge;
     }
 
+    public ArrayList<Student> getStudentsAll() {
+        ArrayList<Student> listOfStudents = new ArrayList<>(studentRepository.findAll());
+        return listOfStudents;
+    }
 }

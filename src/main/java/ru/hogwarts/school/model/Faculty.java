@@ -3,8 +3,10 @@ package ru.hogwarts.school.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Faculty")
 public class Faculty {
 
     @Id
@@ -14,14 +16,7 @@ public class Faculty {
     private String name;
     private String color;
 
-    public Faculty(long facultyId, String name, String color) {
-        this.facultyId = facultyId;
-        this.name = name;
-        this.color = color;
-    }
-
     public Faculty() {
-
     }
 
     public long getFacultyId() {

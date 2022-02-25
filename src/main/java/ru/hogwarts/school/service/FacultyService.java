@@ -13,40 +13,28 @@ public class FacultyService {
 
     private final FacultyRepository facultyRepository;
 
-    private long counterId = 0;
-    private Map<Long, Faculty> faculties = new HashMap<>();
-
     public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;
     }
 
     public Faculty createFaculty(Faculty faculty) {
-        while (faculties.containsKey(counterId)) {
-            counterId++;
-        }
-        faculty.setFacultyId(counterId);
-        faculties.put(counterId, faculty);
-        return faculty;
+        return facultyRepository.save(faculty);
     }
 
     public Faculty getFacultyById(Long facultyId) {
-        return faculties.get(facultyId);
+        return facultyRepository.findById(facultyId).get();
     }
 
     public Faculty updateFaculty(Faculty faculty) {
-        if (faculties.containsKey(faculty.getFacultyId())) {
-            faculties.put(faculty.getFacultyId(), faculty);
-            return faculty;
-        }
-        return null;
+        return facultyRepository.save(faculty);
     }
 
-    public Faculty deleteFaculty(Long facultyId) {
-        return faculties.remove(facultyId);
+    public void deleteFaculty(Long facultyId) {
+        facultyRepository.deleteById(facultyId);
     }
 
     public ArrayList<Faculty> getFacultiesByColor(String color) {
-        ArrayList<Faculty> listOfFaculties = new ArrayList<>(faculties.values());
+        ArrayList<Faculty> listOfFaculties = new ArrayList<>(facultyRepository.findAll());
         ArrayList<Faculty> listOfFacultiesByColor = new ArrayList<>();
         for (Faculty faculty: listOfFaculties) {
             if (faculty.getColor().equals(color)) {
@@ -56,4 +44,8 @@ public class FacultyService {
         return listOfFacultiesByColor;
     }
 
+    public ArrayList<Faculty> getFacultiesAll() {
+        ArrayList<Faculty> listOfFaculties = new ArrayList<>(facultyRepository.findAll());
+        return listOfFaculties;
+    }
 }
