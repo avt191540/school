@@ -1,14 +1,22 @@
 package ru.hogwarts.school.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+//@Table(name = "Faculty")//нет смысла, если назв. таблицы такое же как класс и не надо с большой буквы
 public class Faculty {
+
+    @Id
+    @GeneratedValue
     private long facultyId;
+
     private String name;
     private String color;
 
-    public Faculty(long facultyId, String name, String color) {
-        this.facultyId = facultyId;
-        this.name = name;
-        this.color = color;
+    public Faculty() {
     }
 
     public long getFacultyId() {

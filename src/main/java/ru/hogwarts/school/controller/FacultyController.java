@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/faculty")
 public class FacultyController {
+
     private final FacultyService facultyService;
 
     public FacultyController(FacultyService facultyService) {
@@ -41,11 +42,8 @@ public class FacultyController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
-        Faculty deleteFaculty = facultyService.deleteFaculty(id);
-        if (deleteFaculty == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(deleteFaculty);
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/color/{color}")
@@ -55,5 +53,14 @@ public class FacultyController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(listOfFacultiesByColor);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<ArrayList<Faculty>> getFacultiesAll() {
+        ArrayList<Faculty> listOfFaculties = facultyService.getFacultiesAll();
+        if (listOfFaculties.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(listOfFaculties);
     }
 }
