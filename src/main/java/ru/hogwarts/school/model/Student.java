@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Student")
+//@Table(name = "Student")//нет смысла, если назв. таблицы такое же как класс и не надо с большой буквы
 public class Student {
 
     @Id
