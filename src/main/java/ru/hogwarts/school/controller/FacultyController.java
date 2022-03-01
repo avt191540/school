@@ -63,4 +63,13 @@ public class FacultyController {
         }
         return ResponseEntity.ok(listOfFaculties);
     }
+
+    @GetMapping("/by/{colorOrName}")
+    public ResponseEntity<ArrayList<Faculty>> findFacultiesByColorOrName(@PathVariable String colorOrName) {
+        ArrayList<Faculty> listOfFacultiesByColorOrName = facultyService.findFacultiesByColorOrName(colorOrName);
+        if (listOfFacultiesByColorOrName.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(listOfFacultiesByColorOrName);
+    }
 }

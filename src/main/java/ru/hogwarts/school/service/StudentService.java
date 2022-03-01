@@ -47,4 +47,8 @@ public class StudentService {
         ArrayList<Student> listOfStudents = new ArrayList<>(studentRepository.findAll());
         return listOfStudents;
     }
+
+    public ArrayList<Student> findByAgeBetween(int ageMin, int ageMax) {
+        return studentRepository.findByAgeBetween(ageMin, ageMax);
+    }
 }
