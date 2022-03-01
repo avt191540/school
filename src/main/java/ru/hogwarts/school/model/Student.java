@@ -3,7 +3,6 @@ package ru.hogwarts.school.model;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "Student")//нет смысла, если назв. таблицы такое же как класс и не надо с большой буквы
 public class Student {
 
     @Id
