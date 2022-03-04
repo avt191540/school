@@ -1,12 +1,10 @@
 package ru.hogwarts.school.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-//@Table(name = "Faculty")//нет смысла, если назв. таблицы такое же как класс и не надо с большой буквы
 public class Faculty {
 
     @Id
@@ -15,6 +13,9 @@ public class Faculty {
 
     private String name;
     private String color;
+
+    @OneToMany(mappedBy = "faculty")
+    private Collection<Student> students;
 
     public Faculty() {
     }
@@ -37,6 +38,14 @@ public class Faculty {
 
     public String getColor() {
         return color;
+    }
+
+    public Collection<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Collection<Student> students) {
+        this.students = students;
     }
 
     public void setColor(String color) {

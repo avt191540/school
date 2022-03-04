@@ -48,4 +48,12 @@ public class FacultyService {
         ArrayList<Faculty> listOfFaculties = new ArrayList<>(facultyRepository.findAll());
         return listOfFaculties;
     }
+
+    public ArrayList<Faculty> findFacultiesByColorOrName(String colorOrName) {
+        ArrayList<Faculty> listFacultiesByName = facultyRepository.findFacultiesByNameIgnoreCase(colorOrName);
+        if (listFacultiesByName.size() != 0) {
+            return listFacultiesByName;
+        }
+        return facultyRepository.findFacultiesByColorIgnoreCase(colorOrName);
+    }
 }

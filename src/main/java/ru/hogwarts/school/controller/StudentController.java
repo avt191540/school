@@ -63,4 +63,13 @@ public class StudentController {
         }
         return ResponseEntity.ok(listOfStudents);
     }
+
+    @GetMapping("/age/between")
+    public ResponseEntity<ArrayList<Student>> findStudentsByAgeBetween(@RequestParam int ageMin, @RequestParam int ageMax) {
+        ArrayList<Student> listOfStudentsByAgeBetween = studentService.findByAgeBetween(ageMin, ageMax);
+        if (listOfStudentsByAgeBetween.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(listOfStudentsByAgeBetween);
+    }
 }
