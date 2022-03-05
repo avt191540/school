@@ -57,9 +57,8 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(Long studentId) {
-//        return avatarRepository.findByStudentId(studentId).orElseThrow();
-        return avatarRepository.findByStudentStudentId(studentId).orElseThrow();
-//        return avatarRepository.findByStudentId(studentId);
+        Avatar avatar = avatarRepository.findByStudentStudentId(studentId).orElse(new Avatar());
+        return avatar;
     }
 
     private String getExtensions(String fileName) {

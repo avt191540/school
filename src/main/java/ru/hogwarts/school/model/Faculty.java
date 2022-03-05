@@ -3,6 +3,7 @@ package ru.hogwarts.school.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Faculty {
@@ -50,5 +51,27 @@ public class Faculty {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Faculty faculty = (Faculty) o;
+        return facultyId == faculty.facultyId && name.equals(faculty.name) && color.equals(faculty.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(facultyId, name, color);
+    }
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "facultyId=" + facultyId +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                '}';
     }
 }
