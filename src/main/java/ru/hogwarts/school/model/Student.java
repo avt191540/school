@@ -1,6 +1,7 @@
 package ru.hogwarts.school.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Student {
@@ -49,5 +50,28 @@ public class Student {
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return studentId == student.studentId && age == student.age && name.equals(student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentId, name, age);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
