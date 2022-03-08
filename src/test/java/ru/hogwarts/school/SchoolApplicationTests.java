@@ -88,7 +88,6 @@ class SchoolApplicationTests {
 
 		Assertions
 				.assertThat(response.getBody()).isEqualTo(student);
-
 	}
 
 	@Test
@@ -103,5 +102,4 @@ class SchoolApplicationTests {
 		Assertions
 				.assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
 	}
-
 }
