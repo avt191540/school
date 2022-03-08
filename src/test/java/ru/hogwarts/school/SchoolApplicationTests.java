@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import ru.hogwarts.school.controller.StudentController;
 import ru.hogwarts.school.model.Student;
 
@@ -31,7 +35,7 @@ class SchoolApplicationTests {
 	@Test
 	public void testPostStudent() throws Exception {
 		Student student = new Student();
-		student.setStudentId(4L);
+		student.setStudentId(8L);
 		student.setName("Ivan");
 		student.setAge(18);
 
@@ -43,12 +47,12 @@ class SchoolApplicationTests {
 	@Test
 	public void testGetStudentById() throws Exception {
 		Student studentExpected = new Student();
-		studentExpected.setStudentId(4L);
+		studentExpected.setStudentId(8L);
 		studentExpected.setName("Ivan");
 		studentExpected.setAge(18);
 
 		Assertions
-				.assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/student/4", Student.class))
+				.assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/student/8", Student.class))
 				.isEqualTo(studentExpected);
 	}
 
@@ -73,14 +77,31 @@ class SchoolApplicationTests {
 				.isExactlyInstanceOf(ArrayList.class);
 	}
 
+	@Test
 	public void testUpdateStudent() throws Exception {
 		Student student = new Student();
-		student.setStudentId(5L);
+		student.setStudentId(6L);
 		student.setName("Petr");
 		student.setAge(20);
+		HttpEntity<Student> entity = new HttpEntity<Student>(student);
+		ResponseEntity<Student> response = restTemplate.exchange("http://localhost:" + port + "/student", HttpMethod.PUT, entity, Student.class);
 
 		Assertions
-				.assertThat(this.restTemplate.put("http://localhost:" + port + "/student/age/between?ageMin=14&ageMax=25", student);)
+				.assertThat(response.getBody()).isEqualTo(student);
 
 	}
+
+	@Test
+	public void testDeleteStudent() throws Exception {
+		Student student = new Student();
+		student.setStudentId(9L);
+		student.setName("Bob");
+		student.setAge(23);
+		HttpEntity<Student> entity = new HttpEntity<Student>(student);
+		ResponseEntity<Student> response = restTemplate.exchange("http://localhost:" + port + "/student/9", HttpMethod.DELETE, entity, Student.class);
+
+		Assertions
+				.assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
+	}
+
 }
