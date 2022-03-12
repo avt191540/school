@@ -72,4 +72,14 @@ public class StudentController {
         }
         return ResponseEntity.ok(listOfStudentsByAgeBetween);
     }
+
+    @GetMapping("/number-all")
+    public String getNumberAllStudents() {
+        return "Количество всех студентов в школе: " + studentService.getNumberAllStudentsInSchool();
+    }
+
+    @GetMapping("/average-age")
+    public String getAverageAge() {
+        return "Средний возраст студентов: " + studentService.getAverageAgeStudents();
+    }
 }
