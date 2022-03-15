@@ -2,10 +2,12 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.model.StudentList;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -50,5 +52,17 @@ public class StudentService {
 
     public ArrayList<Student> findByAgeBetween(int ageMin, int ageMax) {
         return studentRepository.findByAgeBetween(ageMin, ageMax);
+    }
+
+    public int getNumberAllStudentsInSchool() {
+        return studentRepository.getNumberAllStudents();
+    }
+
+    public int getAverageAgeStudents() {
+        return studentRepository.getAverageAgeStudentsInSchool();
+    }
+
+    public List<Student> getLastFiveStudents() {
+        return studentRepository.getLastFiveStudentsFromList();
     }
 }
