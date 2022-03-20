@@ -1,3 +1,3 @@
 databaseChangeLog:
-  - inqlude:
-      file: liquibase/scripts/course4lesson3.sql
+  - include:
+      file: liquibase/scripts/icherny.sql
