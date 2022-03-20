@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - inqlude:
+      file: liquibase/scripts/course4lesson3.sql
