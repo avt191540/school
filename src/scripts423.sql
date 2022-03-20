@@ -1,0 +1,2 @@
+SELECT student.name, student.age, faculty.name FROM student LEFT JOIN faculty ON student.faculty_id = faculty. faculty_id;
+SELECT student.name FROM avatar INNER JOIN student ON avatar.student_student_id = student.student_id;
