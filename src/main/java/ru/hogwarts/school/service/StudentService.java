@@ -5,10 +5,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.model.StudentList;
 import ru.hogwarts.school.repository.StudentRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -45,9 +42,10 @@ public class StudentService {
         return listOfStudentsByAge;
     }
 
-    public ArrayList<Student> getStudentsAll() {
-        ArrayList<Student> listOfStudents = new ArrayList<>(studentRepository.findAll());
-        return listOfStudents;
+    public List<Student> getStudentsAll() {
+//        ArrayList<Student> listOfStudents = new ArrayList<Student>(studentRepository.findAll());
+//        return listOfStudents;
+        return studentRepository.findAll();
     }
 
     public ArrayList<Student> findByAgeBetween(int ageMin, int ageMax) {
