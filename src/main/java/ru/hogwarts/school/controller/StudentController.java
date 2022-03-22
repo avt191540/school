@@ -3,11 +3,12 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
-import ru.hogwarts.school.model.StudentList;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/student")
@@ -30,7 +31,7 @@ public class StudentController {
         if (editStudent == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(editStudent);
+        return ok(editStudent);
     }
 
     @GetMapping("{id}")
@@ -39,13 +40,13 @@ public class StudentController {
         if (student == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(student);
+        return ok(student);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Student> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
-        return ResponseEntity.ok().build();
+        return ok().build();
     }
 
     @GetMapping("/age/{age}")
@@ -54,12 +55,12 @@ public class StudentController {
         if (listOfStudentsByAge.size() == 0) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(listOfStudentsByAge);
+        return ok(listOfStudentsByAge);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<ArrayList<Student>> getStudentsAll() {
-        ArrayList<Student> listOfStudents = studentService.getStudentsAll();
+    public ResponseEntity<List<Student>> getStudentsAll() {
+        List<Student> listOfStudents = studentService.getStudentsAll();
         if (listOfStudents.size() == 0) {
             return ResponseEntity.notFound().build();
         }
@@ -72,7 +73,7 @@ public class StudentController {
         if (listOfStudentsByAgeBetween.size() == 0) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(listOfStudentsByAgeBetween);
+        return ok(listOfStudentsByAgeBetween);
     }
 
     @GetMapping("/number-all")
