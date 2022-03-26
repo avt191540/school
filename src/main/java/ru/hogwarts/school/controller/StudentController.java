@@ -90,4 +90,13 @@ public class StudentController {
     public List<Student> getLastFiveStudents() {
         return studentService.getLastFiveStudents();
     }
+
+    @GetMapping("/names/{letter}")
+    public ResponseEntity<List<String>> getNamesStudentsFiltered(@PathVariable String letter) {
+        List<String> namesOfStudentsFiltered = studentService.getNamesStudentsUsingFilter(letter);
+        if (namesOfStudentsFiltered.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ok(namesOfStudentsFiltered);
+    }
 }
