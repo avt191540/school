@@ -81,13 +81,20 @@ public class StudentService {
     }
 
     public List<String> getNamesStudentsUsingFilter(String letter) {
-        Collection<Student> students = studentRepository.findAll();
-        List<String> namesOfStudents = students.stream()
+        List<String> namesOfStudents = studentRepository.findAll().stream()
                 .filter((p) -> p.getName().startsWith(letter))
                 .map((p) -> p.getName())
                 .sorted()
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
         return namesOfStudents;
+    }
+
+    public int getMiddleAgeStudents() {
+        int middleAge = (int) studentRepository.findAll().stream()
+                .mapToInt((p) -> p.getAge())
+                .average()
+                .getAsDouble();
+        return middleAge;
     }
 }

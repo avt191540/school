@@ -8,6 +8,7 @@ import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -66,5 +67,12 @@ public class FacultyService {
             return listFacultiesByName;
         }
         return facultyRepository.findFacultiesByColorIgnoreCase(colorOrName);
+    }
+
+    public String getMaximumNameFaculty() {
+        String nameFacultyMaxLength = facultyRepository.findAll().stream()
+                .map((p) -> p.getName())
+                .max(String::compareTo).get();
+        return nameFacultyMaxLength;
     }
 }

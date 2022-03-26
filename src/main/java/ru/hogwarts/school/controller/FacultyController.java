@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
@@ -71,5 +72,14 @@ public class FacultyController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(listOfFacultiesByColorOrName);
+    }
+
+    @GetMapping("/name-max")
+    public ResponseEntity<String> getMaxNameFaculty() {
+        String nameFacultyMax = facultyService.getMaximumNameFaculty();
+        if (nameFacultyMax.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(nameFacultyMax);
     }
 }

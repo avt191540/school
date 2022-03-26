@@ -99,4 +99,9 @@ public class StudentController {
         }
         return ok(namesOfStudentsFiltered);
     }
+
+    @GetMapping("/middle-age")
+    public String getMiddleAge() {
+        return "Средний возраст студентов в школе: " + studentService.getMiddleAgeStudents();
+    }
 }
