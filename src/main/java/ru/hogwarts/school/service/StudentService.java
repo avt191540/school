@@ -8,6 +8,8 @@ import ru.hogwarts.school.model.StudentList;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class StudentService {
@@ -76,5 +78,23 @@ public class StudentService {
     public List<Student> getLastFiveStudents() {
         logger.debug("Called: getLastFiveStudents()");
         return studentRepository.getLastFiveStudentsFromList();
+    }
+
+    public List<String> getNamesStudentsUsingFilter(String letter) {
+        List<String> namesOfStudents = studentRepository.findAll().stream()
+                .filter((p) -> p.getName().startsWith(letter))
+                .map((p) -> p.getName())
+                .sorted()
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+        return namesOfStudents;
+    }
+
+    public int getMiddleAgeStudents() {
+        int middleAge = (int) studentRepository.findAll().stream()
+                .mapToInt((p) -> p.getAge())
+                .average()
+                .getAsDouble();
+        return middleAge;
     }
 }
