@@ -97,4 +97,49 @@ public class StudentService {
                 .getAsDouble();
         return middleAge;
     }
+
+    public List<Student> getNameStudentsToConsole() {
+
+        List<Student> students = studentRepository.findAll();
+
+        Thread thread1 = new Thread(() -> {
+            System.out.println("Student №3:  " + students.get(2).getName());
+            System.out.println("Student №4:  " + students.get(3).getName());
+        });
+
+        Thread thread2 = new Thread(() -> {
+            System.out.println("Student №5:  " + students.get(4).getName());
+            System.out.println("Student №6:  " + students.get(5).getName());
+        });
+
+        System.out.println("Student №1:  " + students.get(0).getName());
+        System.out.println("Student №2:  " + students.get(1).getName());
+        thread1.start();
+        thread2.start();
+
+        return students;
+    }
+
+    public void getNameStudentsToConsoleSynch() {
+        List<Student> students = studentRepository.findAll();
+
+        Thread thread1 = new Thread(() -> {
+            printName(students,2);
+            printName(students,3);
+        });
+        Thread thread2 = new Thread(() -> {
+            printName(students,4);
+            printName(students,5);
+        });
+        printName(students,0);
+        printName(students,1);
+        thread1.start();
+        thread2.start();
+    }
+
+    public synchronized void printName(List<Student> students, int serialNumber) {
+        String infoForPrint = "Student №" + serialNumber + ": " +
+                               students.get(serialNumber).getName();
+        System.out.println(infoForPrint);
+    }
 }

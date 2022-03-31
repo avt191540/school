@@ -104,4 +104,19 @@ public class StudentController {
     public String getMiddleAge() {
         return "Средний возраст студентов в школе: " + studentService.getMiddleAgeStudents();
     }
+
+    @GetMapping("/name-thread")
+    public ResponseEntity<String> getNameStudentsToConsole() {
+        List<Student> listOfStudentName = studentService. getNameStudentsToConsole () ;
+        if (listOfStudentName.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ok("See the list of student names in the console");
+    }
+
+    @GetMapping("/name-synch")
+    public String getNameStudentsToConsoleSynch() {
+        studentService.getNameStudentsToConsoleSynch();
+        return  "See the list of student names in the console";
+    }
 }
