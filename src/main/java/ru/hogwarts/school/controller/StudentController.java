@@ -115,11 +115,8 @@ public class StudentController {
     }
 
     @GetMapping("/name-synch")
-    public ResponseEntity<String> getNameStudentsToConsoleSynch() {
-        List<Student> listOfStudentName = studentService. getNameStudentsToConsoleSynch () ;
-        if (listOfStudentName.size() == 0) {
-            return ResponseEntity.notFound().build();
-        }
-        return ok("See the list of student names in the console");
+    public String getNameStudentsToConsoleSynch() {
+        studentService.getNameStudentsToConsoleSynch();
+        return  "See the list of student names in the console";
     }
 }
